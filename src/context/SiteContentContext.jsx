@@ -24,6 +24,10 @@ function mapRowToContent(data) {
       note: data.secret_room_note || '',
       photoUrl: data.secret_room_photo_url || null,
     },
+    finalReveal: {
+      recipientName: data.recipient_name || defaultContent.finalReveal.recipientName,
+      message: data.final_message || defaultContent.finalReveal.message,
+    },
   };
 }
 

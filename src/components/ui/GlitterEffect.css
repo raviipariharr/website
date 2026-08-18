@@ -1,0 +1,35 @@
+.glitter-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.glitter-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation-name: glitterTwinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.glitter-particle-gold {
+  background: var(--accent-gold);
+  box-shadow: 0 0 4px rgba(212, 175, 106, 0.8);
+}
+
+.glitter-particle-purple {
+  background: var(--accent-rose);
+  box-shadow: 0 0 4px rgba(183, 126, 224, 0.8);
+}
+
+.glitter-particle-white {
+  background: var(--text-primary);
+  box-shadow: 0 0 3px rgba(245, 243, 239, 0.6);
+}
+
+@keyframes glitterTwinkle {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50% { opacity: 0.9; transform: scale(1.3); }
+}

@@ -5,11 +5,13 @@ import TimeMachine from './components/TimeMachine.jsx';
 import MuseumOfMemories from './components/MuseumOfMemories.jsx';
 import SisterAwards from './components/SisterAwards.jsx';
 import SecretRoomChapter from './components/SecretRoomChapter.jsx';
+import FinalReveal from './components/FinalReveal.jsx';
 import EditorGate from './components/EditorGate.jsx';
 import PageTransition from './components/PageTransition.jsx';
 import HeartsIntroModal from './components/HeartsIntroModal.jsx';
 import HeartsRewardModal from './components/HeartsRewardModal.jsx';
 import HeartsProgress from './components/HeartsProgress.jsx';
+import GlitterEffect from './components/ui/GlitterEffect.jsx';
 import { ToastProvider } from './components/ui/ToastContext.jsx';
 import { HeartsProvider, useHearts } from './components/HeartsContext.jsx';
 import { SiteContentProvider } from './context/SiteContentContext.jsx';
@@ -27,6 +29,7 @@ function AppContent() {
   const museumRef = useRef(null);
   const awardsRef = useRef(null);
   const secretRoomRef = useRef(null);
+  const finalRevealRef = useRef(null);
 
   useEffect(() => {
     if (unlockedStage === 1) {
@@ -41,6 +44,8 @@ function AppContent() {
       awardsRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else if (unlockedStage === 4) {
       secretRoomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (unlockedStage === 5) {
+      finalRevealRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [unlockedStage, heartsIntroSeen]);
 
@@ -52,6 +57,8 @@ function AppContent() {
 
   return (
     <div className="app">
+      <GlitterEffect />
+
       <PageTransition>
         <Landing
           onSecretUnlock={() => setEditorOpen(true)}
@@ -85,11 +92,19 @@ function AppContent() {
 
       {unlockedStage >= 4 && (
         <div ref={secretRoomRef}>
-          <SecretRoomChapter onContinue={() => {}} />
+          <SecretRoomChapter
+            onContinue={() => setUnlockedStage((prev) => Math.max(prev, 5))}
+          />
         </div>
       )}
 
-      {unlockedStage >= 1 && <HeartsProgress />}
+      {unlockedStage >= 5 && (
+        <div ref={finalRevealRef}>
+          <FinalReveal />
+        </div>
+      )}
+
+      {unlockedStage >= 1 && unlockedStage < 5 && <HeartsProgress />}
 
       {showHeartsIntro && (
         <HeartsIntroModal onClose={() => setShowHeartsIntro(false)} />

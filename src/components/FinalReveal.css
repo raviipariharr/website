@@ -1,0 +1,73 @@
+.final-reveal {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.final-reveal-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.final-reveal-confetti-piece {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+}
+
+.final-reveal-confetti-gold {
+  background: var(--accent-gold);
+}
+
+.final-reveal-confetti-purple {
+  background: var(--accent-rose);
+}
+
+.final-reveal-confetti-white {
+  background: var(--text-primary);
+}
+
+.final-reveal-eyebrow {
+  position: relative;
+  z-index: 1;
+  font-size: var(--font-caption);
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.final-reveal-title {
+  position: relative;
+  z-index: 1;
+  font-size: var(--font-display-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: var(--space-md);
+  max-width: 90%;
+}
+
+.final-reveal-message {
+  position: relative;
+  z-index: 1;
+  font-size: var(--font-heading);
+  color: var(--text-primary);
+  font-style: italic;
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .final-reveal-message {
+    max-width: 560px;
+  }
+}

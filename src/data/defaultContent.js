@@ -16,4 +16,8 @@ export const defaultContent = {
     note: '',
     photoUrl: null,
   },
+  finalReveal: {
+    recipientName: 'You',
+    message: 'Happy birthday — I love you.',
+  },
 };

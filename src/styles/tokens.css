@@ -1,16 +1,16 @@
 :root {
-  /* Color */
-  --bg-base: #0A0A0F;
-  --bg-surface: #14141C;
-  --bg-surface-raised: #1C1C26;
+  /* Color — purple luxury theme */
+  --bg-base: #12081F;
+  --bg-surface: #1D1130;
+  --bg-surface-raised: #281A40;
   --accent-gold: #D4AF6A;
-  --accent-rose: #C9758A;
+  --accent-rose: #B77EE0;
   --text-primary: #F5F3EF;
-  --text-secondary: #8B8B94;
-  --text-tertiary: #55555F;
-  --border-hairline: rgba(245, 243, 239, 0.08);
-  --border-hairline-strong: rgba(245, 243, 239, 0.3);
-  --overlay-scrim: rgba(10, 10, 15, 0.6);
+  --text-secondary: #A092B8;
+  --text-tertiary: #6B5C82;
+  --border-hairline: rgba(183, 126, 224, 0.14);
+  --border-hairline-strong: rgba(183, 126, 224, 0.35);
+  --overlay-scrim: rgba(18, 8, 31, 0.7);
   --error: #E07A7A;
 
   /* Typography (mobile-first, scales up at 768px below) */
@@ -36,9 +36,10 @@
   --radius-full: 999px;
 
   /* Shadow */
-  --shadow-resting: 0 4px 24px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.55);
+  --shadow-resting: 0 4px 24px rgba(0, 0, 0, 0.45);
+  --shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.6);
   --shadow-glow-gold: 0 0 32px rgba(212, 175, 106, 0.25);
+  --shadow-glow-purple: 0 0 32px rgba(183, 126, 224, 0.3);
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
