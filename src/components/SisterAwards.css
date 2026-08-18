@@ -1,0 +1,83 @@
+.sister-awards {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-2xl) 24px;
+}
+
+.sister-awards-title {
+  font-size: var(--font-display-l);
+  font-weight: 600;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.sister-awards-status {
+  color: var(--text-secondary);
+  font-size: var(--font-body);
+}
+
+.sister-awards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+  max-width: 420px;
+}
+
+.sister-award-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-resting);
+}
+
+.sister-award-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: var(--shadow-glow-gold);
+  margin-bottom: var(--space-sm);
+}
+
+.sister-award-label {
+  font-size: var(--font-caption);
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.sister-award-name {
+  font-size: var(--font-heading);
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.sister-award-description {
+  font-size: var(--font-body);
+  color: var(--text-secondary);
+}
+
+.sister-awards-continue {
+  margin-top: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .sister-awards-grid {
+    max-width: 480px;
+  }
+}

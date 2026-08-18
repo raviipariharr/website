@@ -1,0 +1,82 @@
+.museum {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-2xl) 0;
+}
+
+.museum-title {
+  font-size: var(--font-display-l);
+  font-weight: 600;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+  padding: 0 24px;
+}
+
+.museum-status {
+  color: var(--text-secondary);
+  font-size: var(--font-body);
+  padding: 0 24px;
+}
+
+.museum-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xl);
+  width: 100%;
+}
+
+.museum-exhibit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.museum-photo-frame {
+  width: 100%;
+  max-width: 600px;
+  max-height: 65vh;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--shadow-resting);
+  overflow: hidden;
+}
+
+.museum-photo {
+  width: 100%;
+  height: 100%;
+  max-height: 65vh;
+  object-fit: cover;
+  display: block;
+}
+
+.museum-exhibit-label {
+  margin-top: var(--space-md);
+  font-size: var(--font-caption);
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+.museum-caption {
+  margin-top: 8px;
+  font-size: var(--font-heading);
+  color: var(--text-primary);
+  text-align: center;
+  max-width: 480px;
+}
+
+.museum-continue {
+  margin-top: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .museum-photo-frame {
+    max-width: 900px;
+  }
+}

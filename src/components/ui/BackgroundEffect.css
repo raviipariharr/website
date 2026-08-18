@@ -1,0 +1,25 @@
+.bg-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: 700px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: pulseGlow 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-effect-gold {
+  background: radial-gradient(circle, rgba(212, 175, 106, 0.07) 0%, rgba(212, 175, 106, 0) 70%);
+}
+
+.bg-effect-rose {
+  background: radial-gradient(circle, rgba(201, 117, 138, 0.07) 0%, rgba(201, 117, 138, 0) 70%);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}

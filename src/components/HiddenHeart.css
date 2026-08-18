@@ -1,0 +1,11 @@
+.hidden-heart {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: var(--accent-rose);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 14px; /* generous invisible hit target around a small visible mark */
+  z-index: 2;
+}

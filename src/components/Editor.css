@@ -1,0 +1,94 @@
+.editor-heading {
+  font-size: var(--font-heading);
+  margin-bottom: var(--space-md);
+  color: var(--text-primary);
+}
+
+.editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.editor-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--font-caption);
+  color: var(--text-secondary);
+}
+
+.editor-input {
+  background: var(--bg-base);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: var(--text-primary);
+  font-size: var(--font-body);
+  font-family: inherit;
+}
+
+.editor-input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+}
+
+.editor-textarea {
+  resize: vertical;
+}
+
+.editor-error {
+  color: var(--error);
+  font-size: var(--font-caption);
+}
+
+.editor-loading {
+  color: var(--text-secondary);
+  font-size: var(--font-body);
+}
+
+.editor-divider {
+  height: 1px;
+  background: var(--border-hairline);
+  margin: var(--space-lg) 0;
+}
+
+.editor-trailer-status {
+  color: var(--accent-gold);
+  font-size: var(--font-caption);
+}
+
+.editor-entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: var(--space-sm);
+}
+
+.editor-entry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-base);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-sm);
+}
+
+.editor-entry-label {
+  font-size: var(--font-caption);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editor-entry-delete {
+  background: transparent;
+  border: none;
+  color: var(--error);
+  font-size: var(--font-caption);
+  cursor: pointer;
+  flex-shrink: 0;
+}

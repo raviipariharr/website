@@ -1,0 +1,57 @@
+:root {
+  /* Color */
+  --bg-base: #0A0A0F;
+  --bg-surface: #14141C;
+  --bg-surface-raised: #1C1C26;
+  --accent-gold: #D4AF6A;
+  --accent-rose: #C9758A;
+  --text-primary: #F5F3EF;
+  --text-secondary: #8B8B94;
+  --text-tertiary: #55555F;
+  --border-hairline: rgba(245, 243, 239, 0.08);
+  --border-hairline-strong: rgba(245, 243, 239, 0.3);
+  --overlay-scrim: rgba(10, 10, 15, 0.6);
+  --error: #E07A7A;
+
+  /* Typography (mobile-first, scales up at 768px below) */
+  --font-family: 'Helvetica Neue', Arial, sans-serif;
+  --font-display-xl: 44px;
+  --font-display-l: 32px;
+  --font-heading: 20px;
+  --font-body: 16px;
+  --font-caption: 13px;
+
+  /* Spacing (8px base scale) */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* Shadow */
+  --shadow-resting: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.55);
+  --shadow-glow-gold: 0 0 32px rgba(212, 175, 106, 0.25);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 600ms;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-display-xl: 84px;
+    --font-display-l: 56px;
+    --font-heading: 28px;
+    --font-body: 18px;
+  }
+}

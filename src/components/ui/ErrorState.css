@@ -1,0 +1,18 @@
+.error-state {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  background: var(--bg-base);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.error-state-message {
+  color: var(--text-secondary);
+  font-size: var(--font-body);
+  max-width: 320px;
+}
