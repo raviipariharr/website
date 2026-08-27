@@ -4,6 +4,7 @@ import Landing from './components/Landing.jsx';
 import TimeMachine from './components/TimeMachine.jsx';
 import MuseumOfMemories from './components/MuseumOfMemories.jsx';
 import SisterAwards from './components/SisterAwards.jsx';
+import ThreeGifts from './components/ThreeGifts.jsx';
 import SecretRoomChapter from './components/SecretRoomChapter.jsx';
 import FinalReveal from './components/FinalReveal.jsx';
 import EditorGate from './components/EditorGate.jsx';
@@ -28,6 +29,7 @@ function AppContent() {
   const timeMachineRef = useRef(null);
   const museumRef = useRef(null);
   const awardsRef = useRef(null);
+  const giftsRef = useRef(null);
   const secretRoomRef = useRef(null);
   const finalRevealRef = useRef(null);
 
@@ -43,8 +45,10 @@ function AppContent() {
     } else if (unlockedStage === 3) {
       awardsRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else if (unlockedStage === 4) {
-      secretRoomRef.current?.scrollIntoView({ behavior: 'smooth' });
+      giftsRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else if (unlockedStage === 5) {
+      secretRoomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (unlockedStage === 6) {
       finalRevealRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [unlockedStage, heartsIntroSeen]);
@@ -91,20 +95,28 @@ function AppContent() {
       )}
 
       {unlockedStage >= 4 && (
-        <div ref={secretRoomRef}>
-          <SecretRoomChapter
+        <div ref={giftsRef}>
+          <ThreeGifts
             onContinue={() => setUnlockedStage((prev) => Math.max(prev, 5))}
           />
         </div>
       )}
 
       {unlockedStage >= 5 && (
+        <div ref={secretRoomRef}>
+          <SecretRoomChapter
+            onContinue={() => setUnlockedStage((prev) => Math.max(prev, 6))}
+          />
+        </div>
+      )}
+
+      {unlockedStage >= 6 && (
         <div ref={finalRevealRef}>
           <FinalReveal />
         </div>
       )}
 
-      {unlockedStage >= 1 && unlockedStage < 5 && <HeartsProgress />}
+      {unlockedStage >= 1 && unlockedStage < 6 && <HeartsProgress />}
 
       {showHeartsIntro && (
         <HeartsIntroModal onClose={() => setShowHeartsIntro(false)} />

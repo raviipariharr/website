@@ -1,0 +1,58 @@
+.three-gifts {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl) 24px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.three-gifts-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.three-gifts-title {
+  position: relative;
+  z-index: 1;
+  font-size: var(--font-display-l);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.three-gifts-subtitle {
+  position: relative;
+  z-index: 1;
+  color: var(--text-secondary);
+  font-size: var(--font-body);
+  margin-bottom: var(--space-xl);
+}
+
+.three-gifts-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.three-gifts-progress {
+  position: relative;
+  z-index: 1;
+  color: var(--text-tertiary);
+  font-size: var(--font-caption);
+  margin-bottom: var(--space-lg);
+}
+
+.three-gifts-continue {
+  position: relative;
+  z-index: 1;
+}

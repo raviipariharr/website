@@ -28,6 +28,19 @@ function mapRowToContent(data) {
       recipientName: data.recipient_name || defaultContent.finalReveal.recipientName,
       message: data.final_message || defaultContent.finalReveal.message,
     },
+    gift1: {
+      type: data.gift1_type || defaultContent.gift1.type,
+      label: data.gift1_label || defaultContent.gift1.label,
+      subtitle: data.gift1_subtitle || defaultContent.gift1.subtitle,
+      description: data.gift1_description || defaultContent.gift1.description,
+      fileUrl: data.gift1_file_url || null,
+      linkUrl: data.gift1_link_url || null,
+      buttonLabel: data.gift1_button_label || defaultContent.gift1.buttonLabel,
+    },
+    gift2: {
+      label: data.gift2_label || defaultContent.gift2.label,
+      message: data.gift2_message || defaultContent.gift2.message,
+    },
   };
 }
 

@@ -1,0 +1,114 @@
+.gift-box-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  perspective: 800px;
+}
+
+.gift-box {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.gift-box-base {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 68%;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--box-color-a), var(--box-color-b));
+  box-shadow: var(--shadow-resting);
+}
+
+.gift-box-base::before,
+.gift-box-base::after {
+  content: '';
+  position: absolute;
+  background: rgba(245, 243, 239, 0.5);
+}
+
+.gift-box-base::before {
+  top: 0;
+  bottom: 0;
+  left: 46%;
+  width: 8%;
+}
+
+.gift-box-base::after {
+  left: 0;
+  right: 0;
+  top: 40%;
+  height: 8%;
+}
+
+.gift-box-lid {
+  position: absolute;
+  top: 24%;
+  left: -6%;
+  right: -6%;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--box-color-a), var(--box-color-b));
+  box-shadow: var(--shadow-resting);
+  transform-origin: bottom center;
+  z-index: 3;
+}
+
+.gift-box-lid::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 46%;
+  width: 8%;
+  height: 12px;
+  border-radius: 3px;
+  background: rgba(245, 243, 239, 0.5);
+}
+
+.gift-box-glow {
+  position: absolute;
+  inset: -25%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, transparent 70%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gift-particle {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.gift-box-label {
+  font-size: var(--font-caption);
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.gift-box-gold {
+  --box-color-a: #d4af6a;
+  --box-color-b: #a9793e;
+}
+
+.gift-box-rose {
+  --box-color-a: #b77ee0;
+  --box-color-b: #7f4fb0;
+}
+
+.gift-box-indigo {
+  --box-color-a: #8f7bff;
+  --box-color-b: #5a47c7;
+}
