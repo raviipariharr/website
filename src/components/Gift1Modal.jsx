@@ -1,60 +1,45 @@
+import { motion } from 'framer-motion';
 import Modal from './ui/Modal.jsx';
-import Button from './ui/Button.jsx';
+import { useSiteContent } from '../hooks/useSiteContent.js';
 
-function Gift1Modal({ onClose, content }) {
-  const { label, subtitle, description, fileUrl, linkUrl, buttonLabel } = content;
-
-  const actionUrl = fileUrl || linkUrl;
-  const isDownload = !!fileUrl;
+function Gift1Modal({ onClose }) {
+  const { content } = useSiteContent();
+  const { line1, line2, line3 } = content.gift1;
 
   return (
     <Modal onClose={onClose}>
-      <p className="editor-trailer-status" style={{ marginBottom: 4 }}>
-        {label || 'YOUR FIRST GIFT'}
-      </p>
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="editor-trailer-status"
+        style={{ fontSize: 'var(--font-caption)', marginBottom: 8 }}
+      >
+        {line1}
+      </motion.p>
 
-      <h2 className="editor-heading">
-        {subtitle || 'Something you can actually keep.'}
-      </h2>
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.4 }}
+        style={{
+          color: 'var(--text-secondary)',
+          fontSize: 'var(--font-body)',
+          marginBottom: 8,
+        }}
+      >
+        {line2}
+      </motion.p>
 
-      {description && (
-        <p
-          style={{
-            color: 'var(--text-secondary)',
-            marginBottom: 'var(--space-lg)',
-            lineHeight: 1.6,
-          }}
-        >
-          {description}
-        </p>
-      )}
-
-      {actionUrl ? (
-        <a
-          href={actionUrl}
-          download={isDownload || undefined}
-          target={isDownload ? undefined : '_blank'}
-          rel="noreferrer"
-          style={{
-            textDecoration: 'none',
-            display: 'block',
-          }}
-        >
-          <Button variant="primary" fullWidth>
-            {buttonLabel ||
-              (isDownload ? 'DOWNLOAD YOUR GIFT' : 'OPEN YOUR GIFT')}
-          </Button>
-        </a>
-      ) : (
-        <p
-          style={{
-            color: 'var(--text-tertiary)',
-            fontSize: 'var(--font-caption)',
-          }}
-        >
-          This gift hasn't been set up yet.
-        </p>
-      )}
+      <motion.h2
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.9 }}
+        className="editor-heading"
+        style={{ marginBottom: 0 }}
+      >
+        {line3}
+      </motion.h2>
     </Modal>
   );
 }

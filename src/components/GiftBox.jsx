@@ -35,21 +35,30 @@ function GiftParticles() {
   );
 }
 
-function GiftBox({ label, color = 'gold', opened, onOpened }) {
+function GiftBox({ label, color = 'gold', opened, dramatic = false, onOpened, onClickStart }) {
   const [stage, setStage] = useState(opened ? STAGE_OPEN : STAGE_IDLE);
 
   function handleClick() {
     if (stage === STAGE_OPEN) {
-      onOpened(); // already open — just reopen its modal
+      onOpened();
       return;
     }
-    if (stage !== STAGE_IDLE) return; // mid-animation, ignore extra clicks
+    if (stage !== STAGE_IDLE) return;
+
+    onClickStart?.();
+
+    const shakeDuration = dramatic ? 700 : 450;
+    const openDelay = dramatic ? 1600 : 900;
 
     setStage(STAGE_SHAKE);
-    playChime();
+    if (!dramatic) playChime();
 
-    setTimeout(() => setStage(STAGE_OPEN), 450);
-    setTimeout(() => onOpened(), 450 + 900);
+    setTimeout(() => {
+      setStage(STAGE_OPEN);
+      if (dramatic) playChime();
+    }, shakeDuration);
+
+    setTimeout(() => onOpened(), shakeDuration + openDelay);
   }
 
   const isOpen = stage === STAGE_OPEN;
@@ -64,17 +73,17 @@ function GiftBox({ label, color = 'gold', opened, onOpened }) {
             ? { x: [0, -6, 6, -6, 6, 0], rotate: [0, -2, 2, -2, 2, 0] }
             : {}
         }
-        transition={{ duration: 0.45 }}
+        transition={{ duration: dramatic ? 0.7 : 0.45 }}
         whileHover={stage === STAGE_IDLE ? { scale: 1.03, y: -4 } : {}}
       >
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="gift-box-glow"
+              className={`gift-box-glow ${dramatic ? 'gift-box-glow-dramatic' : ''}`}
               initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1.6 }}
+              animate={{ opacity: 1, scale: dramatic ? 2.4 : 1.6 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
+              transition={{ duration: dramatic ? 1.4 : 0.7, ease: 'easeOut' }}
             />
           )}
         </AnimatePresence>
@@ -84,7 +93,7 @@ function GiftBox({ label, color = 'gold', opened, onOpened }) {
         <motion.div
           className="gift-box-lid"
           animate={isOpen ? { rotateX: -120, y: -14 } : { rotateX: 0, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: dramatic ? 1.1 : 0.6, ease: [0.16, 1, 0.3, 1] }}
         />
 
         <div className="gift-box-base" />

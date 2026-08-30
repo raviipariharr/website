@@ -21,16 +21,16 @@ export const defaultContent = {
     message: 'Happy birthday — I love you.',
   },
   gift1: {
-    type: 'file',
-    label: 'YOUR FIRST GIFT',
-    subtitle: 'Something you can actually keep.',
-    description: '',
-    fileUrl: null,
-    linkUrl: null,
-    buttonLabel: 'DOWNLOAD YOUR GIFT',
+    line1: 'CONGRATULATIONS',
+    line2: 'You have officially won...',
+    line3: 'Absolutely nothing. 😂',
   },
   gift2: {
-    label: "This gift isn't for today.",
-    message: "Open this when you need a reminder that you're loved.",
+    resultArgument: "Oh, {name} already know it's {name}. 😂 Every single time, over nothing.",
+    resultLove: "It's {name} — always has been. ❤️ Softest heart in the room, no contest.",
+    resultSteal: "Guilty as charged, {name}. 🤦 We all know whose hoodie that actually is.",
+  },
+  gift3: {
+    message: "You really thought I'd tell you what's inside? 😂",
   },
 };

@@ -29,17 +29,17 @@ function mapRowToContent(data) {
       message: data.final_message || defaultContent.finalReveal.message,
     },
     gift1: {
-      type: data.gift1_type || defaultContent.gift1.type,
-      label: data.gift1_label || defaultContent.gift1.label,
-      subtitle: data.gift1_subtitle || defaultContent.gift1.subtitle,
-      description: data.gift1_description || defaultContent.gift1.description,
-      fileUrl: data.gift1_file_url || null,
-      linkUrl: data.gift1_link_url || null,
-      buttonLabel: data.gift1_button_label || defaultContent.gift1.buttonLabel,
+      line1: data.gift1_line1 || defaultContent.gift1.line1,
+      line2: data.gift1_line2 || defaultContent.gift1.line2,
+      line3: data.gift1_line3 || defaultContent.gift1.line3,
     },
     gift2: {
-      label: data.gift2_label || defaultContent.gift2.label,
-      message: data.gift2_message || defaultContent.gift2.message,
+      resultArgument: data.gift2_result_argument || defaultContent.gift2.resultArgument,
+      resultLove: data.gift2_result_love || defaultContent.gift2.resultLove,
+      resultSteal: data.gift2_result_steal || defaultContent.gift2.resultSteal,
+    },
+    gift3: {
+      message: data.gift3_message || defaultContent.gift3.message,
     },
   };
 }

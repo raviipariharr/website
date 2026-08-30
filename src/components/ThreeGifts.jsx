@@ -4,27 +4,30 @@ import GiftBox from './GiftBox.jsx';
 import Gift1Modal from './Gift1Modal.jsx';
 import Gift2Modal from './Gift2Modal.jsx';
 import Gift3Modal from './Gift3Modal.jsx';
-import { useSiteContent } from '../hooks/useSiteContent.js';
 import Button from './ui/Button.jsx';
 import './ThreeGifts.css';
 
 const FLASH_COLORS = {
   1: 'rgba(212, 175, 106, 0.12)',
   2: 'rgba(183, 126, 224, 0.12)',
-  3: 'rgba(143, 123, 255, 0.12)',
 };
 
 function ThreeGifts({ onContinue }) {
-  const { content } = useSiteContent();
   const [openedGifts, setOpenedGifts] = useState({ 1: false, 2: false, 3: false });
   const [activeModal, setActiveModal] = useState(null);
   const [flash, setFlash] = useState(null);
+  const [mysteryDark, setMysteryDark] = useState(false);
 
   function markOpened(num) {
     setOpenedGifts((prev) => ({ ...prev, [num]: true }));
     setActiveModal(num);
-    setFlash(FLASH_COLORS[num]);
-    setTimeout(() => setFlash(null), 1200);
+
+    if (num === 3) {
+      setMysteryDark(false);
+    } else {
+      setFlash(FLASH_COLORS[num]);
+      setTimeout(() => setFlash(null), 1200);
+    }
   }
 
   const openedCount = Object.values(openedGifts).filter(Boolean).length;
@@ -40,6 +43,18 @@ function ThreeGifts({ onContinue }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {mysteryDark && (
+          <motion.div
+            className="three-gifts-mystery-dark"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9 }}
           />
         )}
       </AnimatePresence>
@@ -65,7 +80,9 @@ function ThreeGifts({ onContinue }) {
         <GiftBox
           label="GIFT THREE"
           color="indigo"
+          dramatic
           opened={openedGifts[3]}
+          onClickStart={() => setMysteryDark(true)}
           onOpened={() => markOpened(3)}
         />
       </div>
@@ -79,12 +96,8 @@ function ThreeGifts({ onContinue }) {
       </div>
 
       <AnimatePresence>
-        {activeModal === 1 && (
-          <Gift1Modal onClose={() => setActiveModal(null)} content={content.gift1} />
-        )}
-        {activeModal === 2 && (
-          <Gift2Modal onClose={() => setActiveModal(null)} content={content.gift2} />
-        )}
+        {activeModal === 1 && <Gift1Modal onClose={() => setActiveModal(null)} />}
+        {activeModal === 2 && <Gift2Modal onClose={() => setActiveModal(null)} />}
         {activeModal === 3 && <Gift3Modal onClose={() => setActiveModal(null)} />}
       </AnimatePresence>
     </section>

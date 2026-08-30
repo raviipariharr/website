@@ -18,6 +18,14 @@
   pointer-events: none;
 }
 
+.three-gifts-mystery-dark {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 900;
+  pointer-events: none;
+}
+
 .three-gifts-title {
   position: relative;
   z-index: 1;

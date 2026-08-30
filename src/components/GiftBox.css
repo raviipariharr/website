@@ -79,6 +79,10 @@
   pointer-events: none;
 }
 
+.gift-box-glow-dramatic {
+  background: radial-gradient(circle, rgba(143, 123, 255, 0.75) 0%, transparent 70%);
+}
+
 .gift-particle {
   position: absolute;
   top: 42%;

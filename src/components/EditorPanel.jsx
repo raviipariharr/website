@@ -6,21 +6,10 @@ import TimeMachineEditorSection from './TimeMachineEditorSection.jsx';
 import MuseumEditorSection from './MuseumEditorSection.jsx';
 import SisterAwardsEditorSection from './SisterAwardsEditorSection.jsx';
 import SecretRoomEditorSection from './SecretRoomEditorSection.jsx';
-import Gift1UploadSection from './Gift1UploadSection.jsx';
-import Gift3MessagesEditorSection from './Gift3MessagesEditorSection.jsx';
+import { defaultContent } from '../data/defaultContent.js';
 
 const SITE_SLUG = 'default';
 const TRAILER_STORAGE_PATH = 'trailer/trailer.mp4';
-
-const GIFT1_TYPES = [
-  { value: 'file', label: 'Downloadable File' },
-  { value: 'wallpaper', label: 'Digital Wallpaper' },
-  { value: 'pdf', label: 'PDF' },
-  { value: 'playlist', label: 'Playlist Link' },
-  { value: 'voucher', label: 'Digital Voucher' },
-  { value: 'custom_card', label: 'Custom Digital Card' },
-  { value: 'other', label: 'Other' },
-];
 
 function EditorPanel() {
   const { showToast } = useToast();
@@ -70,14 +59,13 @@ function EditorPanel() {
         secret_room_password: form.secret_room_password,
         secret_room_hint: form.secret_room_hint,
         secret_room_note: form.secret_room_note,
-        gift1_type: form.gift1_type,
-        gift1_label: form.gift1_label,
-        gift1_subtitle: form.gift1_subtitle,
-        gift1_description: form.gift1_description,
-        gift1_link_url: form.gift1_link_url,
-        gift1_button_label: form.gift1_button_label,
-        gift2_label: form.gift2_label,
-        gift2_message: form.gift2_message,
+        gift1_line1: form.gift1_line1,
+        gift1_line2: form.gift1_line2,
+        gift1_line3: form.gift1_line3,
+        gift2_result_argument: form.gift2_result_argument,
+        gift2_result_love: form.gift2_result_love,
+        gift2_result_steal: form.gift2_result_steal,
+        gift3_message: form.gift3_message,
       })
       .eq('slug', SITE_SLUG);
 
@@ -254,97 +242,108 @@ function EditorPanel() {
 
         <div className="editor-divider" />
         <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
-          Gift One
+          Gift One — Funny Surprise
+        </p>
+        <p
+          style={{
+            color: 'var(--text-tertiary)',
+            fontSize: 'var(--font-caption)',
+            marginTop: -8,
+          }}
+        >
+          Leave blank to keep the default joke.
         </p>
 
         <label className="editor-label">
-          Gift Type
-          <select
-            className="editor-input"
-            value={form.gift1_type || 'file'}
-            onChange={(e) => handleChange('gift1_type', e.target.value)}
-          >
-            {GIFT1_TYPES.map((t) => (
-              <option key={t.value} value={t.value}>
-                {t.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="editor-label">
-          Label
+          Line 1
           <input
             className="editor-input"
-            value={form.gift1_label || ''}
-            onChange={(e) => handleChange('gift1_label', e.target.value)}
-            placeholder="YOUR FIRST GIFT"
+            value={form.gift1_line1 || ''}
+            onChange={(e) => handleChange('gift1_line1', e.target.value)}
+            placeholder={defaultContent.gift1.line1}
           />
         </label>
 
         <label className="editor-label">
-          Subtitle
+          Line 2
           <input
             className="editor-input"
-            value={form.gift1_subtitle || ''}
-            onChange={(e) => handleChange('gift1_subtitle', e.target.value)}
-            placeholder="Something you can actually keep."
+            value={form.gift1_line2 || ''}
+            onChange={(e) => handleChange('gift1_line2', e.target.value)}
+            placeholder={defaultContent.gift1.line2}
           />
         </label>
 
         <label className="editor-label">
-          Description (used for the message on voucher / custom card types)
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.gift1_description || ''}
-            onChange={(e) => handleChange('gift1_description', e.target.value)}
-            rows={2}
-          />
-        </label>
-
-        <label className="editor-label">
-          Link URL (used for Playlist / Other types, instead of a file)
+          Line 3 (the punchline)
           <input
             className="editor-input"
-            value={form.gift1_link_url || ''}
-            onChange={(e) => handleChange('gift1_link_url', e.target.value)}
-            placeholder="https://..."
-          />
-        </label>
-
-        <label className="editor-label">
-          Button Label
-          <input
-            className="editor-input"
-            value={form.gift1_button_label || ''}
-            onChange={(e) => handleChange('gift1_button_label', e.target.value)}
-            placeholder="DOWNLOAD YOUR GIFT"
+            value={form.gift1_line3 || ''}
+            onChange={(e) => handleChange('gift1_line3', e.target.value)}
+            placeholder={defaultContent.gift1.line3}
           />
         </label>
 
         <div className="editor-divider" />
         <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
-          Gift Two — A Future Gift
+          Gift Two — Interactive Question Results
+        </p>
+        <p
+          style={{
+            color: 'var(--text-tertiary)',
+            fontSize: 'var(--font-caption)',
+            marginTop: -8,
+          }}
+        >
+          Use {'{name}'} anywhere you want the Recipient Name inserted. Leave blank to keep the default.
         </p>
 
         <label className="editor-label">
-          Label
-          <input
-            className="editor-input"
-            value={form.gift2_label || ''}
-            onChange={(e) => handleChange('gift2_label', e.target.value)}
-            placeholder="This gift isn't for today."
+          Result: "Start an unnecessary argument?"
+          <textarea
+            className="editor-input editor-textarea"
+            value={form.gift2_result_argument || ''}
+            onChange={(e) => handleChange('gift2_result_argument', e.target.value)}
+            placeholder={defaultContent.gift2.resultArgument}
+            rows={2}
           />
         </label>
+
+        <label className="editor-label">
+          Result: "Say 'I love you' first?"
+          <textarea
+            className="editor-input editor-textarea"
+            value={form.gift2_result_love || ''}
+            onChange={(e) => handleChange('gift2_result_love', e.target.value)}
+            placeholder={defaultContent.gift2.resultLove}
+            rows={2}
+          />
+        </label>
+
+        <label className="editor-label">
+          Result: "Steal the other's stuff?"
+          <textarea
+            className="editor-input editor-textarea"
+            value={form.gift2_result_steal || ''}
+            onChange={(e) => handleChange('gift2_result_steal', e.target.value)}
+            placeholder={defaultContent.gift2.resultSteal}
+            rows={2}
+          />
+        </label>
+
+        <div className="editor-divider" />
+        <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
+          Gift Three — Mystery Message
+        </p>
 
         <label className="editor-label">
           Message
           <textarea
             className="editor-input editor-textarea"
-            value={form.gift2_message || ''}
-            onChange={(e) => handleChange('gift2_message', e.target.value)}
-            rows={3}
-            placeholder="Open this when you need a reminder that you're loved."
+            value={form.gift3_message || ''}
+            onChange={(e) => handleChange('gift3_message', e.target.value)}
+            placeholder={defaultContent.gift3.message}
+            rows={2}
           />
         </label>
 
@@ -397,17 +396,6 @@ function EditorPanel() {
 
       <div className="editor-divider" />
 
-      <Gift1UploadSection
-        currentFileUrl={form.gift1_file_url}
-        onFileUploaded={(url) => setForm((prev) => ({ ...prev, gift1_file_url: url }))}
-      />
-
-      <div className="editor-divider" />
-
-      <Gift3MessagesEditorSection />
-
-      <div className="editor-divider" />
-
       <SecretRoomEditorSection
         currentPhotoUrl={form.secret_room_photo_url}
         onPhotoUploaded={(url) =>
@@ -418,4 +406,4 @@ function EditorPanel() {
   );
 }
 
-export default EditorPanel;
+export default EditorPanel; 
