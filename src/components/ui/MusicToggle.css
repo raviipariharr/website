@@ -1,0 +1,17 @@
+.music-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -33,4 +33,10 @@ export const defaultContent = {
   gift3: {
     message: "You really thought I'd tell you what's inside? 😂",
   },
+  quiz: {
+    endMessage: 'Congratulations! You know us almost as well as you think you do. 😂',
+  },
+  backgroundMusic: {
+    url: null,
+  },
 };

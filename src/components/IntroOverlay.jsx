@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playFanfare, playConfettiPops } from '../utils/playChime.js';
+import { useBackgroundMusic } from '../context/BackgroundMusicContext.jsx';
 import './IntroOverlay.css';
 
 const PIECES_PER_CANNON = 55;
@@ -76,11 +77,13 @@ function IntroConfetti() {
 
 function IntroOverlay({ onFinish }) {
   const [stage, setStage] = useState('waiting'); // waiting -> celebrating -> leaving
+  const { start: startMusic } = useBackgroundMusic();
 
   function handleTap() {
     if (stage !== 'waiting') return;
 
     setStage('celebrating');
+    startMusic()
 
     // Both pops scheduled together on one audio clock — tight,
     // exact 80ms gap instead of drifting.

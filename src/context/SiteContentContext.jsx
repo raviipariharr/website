@@ -41,6 +41,12 @@ function mapRowToContent(data) {
     gift3: {
       message: data.gift3_message || defaultContent.gift3.message,
     },
+    quiz: {
+      endMessage: data.quiz_end_message || defaultContent.quiz.endMessage,
+    },
+    backgroundMusic: {
+      url: data.background_music_url || null,
+    },
   };
 }
 

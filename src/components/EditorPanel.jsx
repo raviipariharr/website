@@ -6,6 +6,8 @@ import TimeMachineEditorSection from './TimeMachineEditorSection.jsx';
 import MuseumEditorSection from './MuseumEditorSection.jsx';
 import SisterAwardsEditorSection from './SisterAwardsEditorSection.jsx';
 import SecretRoomEditorSection from './SecretRoomEditorSection.jsx';
+import QuizEditorSection from './QuizEditorSection.jsx';
+import BackgroundMusicUploadSection from './BackgroundMusicUploadSection.jsx';
 import { defaultContent } from '../data/defaultContent.js';
 
 const SITE_SLUG = 'default';
@@ -66,6 +68,7 @@ function EditorPanel() {
         gift2_result_love: form.gift2_result_love,
         gift2_result_steal: form.gift2_result_steal,
         gift3_message: form.gift3_message,
+        quiz_end_message: form.quiz_end_message,
       })
       .eq('slug', SITE_SLUG);
 
@@ -244,15 +247,6 @@ function EditorPanel() {
         <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
           Gift One — Funny Surprise
         </p>
-        <p
-          style={{
-            color: 'var(--text-tertiary)',
-            fontSize: 'var(--font-caption)',
-            marginTop: -8,
-          }}
-        >
-          Leave blank to keep the default joke.
-        </p>
 
         <label className="editor-label">
           Line 1
@@ -287,15 +281,6 @@ function EditorPanel() {
         <div className="editor-divider" />
         <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
           Gift Two — Interactive Question Results
-        </p>
-        <p
-          style={{
-            color: 'var(--text-tertiary)',
-            fontSize: 'var(--font-caption)',
-            marginTop: -8,
-          }}
-        >
-          Use {'{name}'} anywhere you want the Recipient Name inserted. Leave blank to keep the default.
         </p>
 
         <label className="editor-label">
@@ -343,6 +328,22 @@ function EditorPanel() {
             value={form.gift3_message || ''}
             onChange={(e) => handleChange('gift3_message', e.target.value)}
             placeholder={defaultContent.gift3.message}
+            rows={2}
+          />
+        </label>
+
+        <div className="editor-divider" />
+        <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
+          Quiz End Message
+        </p>
+
+        <label className="editor-label">
+          Message
+          <textarea
+            className="editor-input editor-textarea"
+            value={form.quiz_end_message || ''}
+            onChange={(e) => handleChange('quiz_end_message', e.target.value)}
+            placeholder={defaultContent.quiz.endMessage}
             rows={2}
           />
         </label>
@@ -396,6 +397,19 @@ function EditorPanel() {
 
       <div className="editor-divider" />
 
+      <QuizEditorSection />
+
+      <div className="editor-divider" />
+
+      <BackgroundMusicUploadSection
+        currentMusicUrl={form.background_music_url}
+        onMusicUploaded={(url) =>
+          setForm((prev) => ({ ...prev, background_music_url: url }))
+        }
+      />
+
+      <div className="editor-divider" />
+
       <SecretRoomEditorSection
         currentPhotoUrl={form.secret_room_photo_url}
         onPhotoUploaded={(url) =>
@@ -406,4 +420,4 @@ function EditorPanel() {
   );
 }
 
-export default EditorPanel; 
+export default EditorPanel;
