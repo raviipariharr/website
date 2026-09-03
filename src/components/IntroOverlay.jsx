@@ -1,25 +1,21 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { playFanfare } from '../utils/playChime.js';
+import { playFanfare, playConfettiPops } from '../utils/playChime.js';
 import './IntroOverlay.css';
 
 const PIECES_PER_CANNON = 55;
 const COLORS = ['gold', 'purple', 'white', 'rose'];
 
-// Builds one cannon's worth of confetti pieces.
-// originX: 0 = launched from left edge, 1 = launched from right edge.
 function buildCannon(originX, seedOffset) {
   return Array.from({ length: PIECES_PER_CANNON }).map((_, i) => {
     const id = seedOffset + i;
 
-    // Launch angle: mostly upward, biased inward toward center
-    // so the two cannons visually cross over the middle of the screen.
-    const baseAngle = originX === 0 ? -60 : -120; // degrees, 0 = right, -90 = straight up
+    const baseAngle = originX === 0 ? -60 : -120;
     const angleSpread = 50;
     const angle = baseAngle + (Math.random() * angleSpread - angleSpread / 2);
     const radians = (angle * Math.PI) / 180;
 
-    const power = Math.random() * 260 + 220; // launch distance
+    const power = Math.random() * 260 + 220;
     const peakX = Math.cos(radians) * power;
     const peakY = Math.sin(radians) * power;
 
@@ -85,7 +81,13 @@ function IntroOverlay({ onFinish }) {
     if (stage !== 'waiting') return;
 
     setStage('celebrating');
-    playFanfare();
+
+    // Both pops scheduled together on one audio clock — tight,
+    // exact 80ms gap instead of drifting.
+    playConfettiPops();
+
+    // Fanfare scheduled on the same shared clock, ~220ms after now.
+    playFanfare(0.22);
 
     setTimeout(() => setStage('leaving'), 2600);
   }
