@@ -1,5 +1,4 @@
-// A short three-note chime, synthesized with the Web Audio API —
-// no audio file needed. Fails silently if the browser blocks it.
+// Short three-note chime for small interactions (gift boxes).
 export function playChime() {
   try {
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -27,6 +26,38 @@ export function playChime() {
       osc.stop(startTime + 0.4);
     });
   } catch (e) {
-    console.warn('Could not play gift sound:', e);
+    console.warn('Could not play sound:', e);
+  }
+}
+
+// Bigger 5-note ascending fanfare for the opening confetti moment.
+export function playFanfare() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+
+    const ctx = new AudioCtx();
+    const notes = [392.0, 523.25, 659.25, 783.99, 1046.5]; // G4, C5, E5, G5, C6
+
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.value = freq;
+
+      const startTime = ctx.currentTime + i * 0.12;
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.18, startTime + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.6);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(startTime);
+      osc.stop(startTime + 0.6);
+    });
+  } catch (e) {
+    console.warn('Could not play fanfare:', e);
   }
 }

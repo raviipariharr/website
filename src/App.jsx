@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import './App.css';
+import IntroOverlay from './components/IntroOverlay.jsx';
 import Landing from './components/Landing.jsx';
 import TimeMachine from './components/TimeMachine.jsx';
 import MuseumOfMemories from './components/MuseumOfMemories.jsx';
@@ -18,6 +19,7 @@ import { HeartsProvider, useHearts } from './components/HeartsContext.jsx';
 import { SiteContentProvider } from './context/SiteContentContext.jsx';
 
 function AppContent() {
+  const [introDone, setIntroDone] = useState(false);
   const [editorOpen, setEditorOpen] = useState(false);
   const [unlockedStage, setUnlockedStage] = useState(0);
   const [heartsIntroSeen, setHeartsIntroSeen] = useState(false);
@@ -58,6 +60,10 @@ function AppContent() {
       setShowHeartsReward(true);
     }
   }, [allFound]);
+
+  if (!introDone) {
+    return <IntroOverlay onFinish={() => setIntroDone(true)} />;
+  }
 
   return (
     <div className="app">
