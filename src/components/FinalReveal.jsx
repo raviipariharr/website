@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useSiteContent } from '../hooks/useSiteContent.js';
-import { useSecretRoomVoiceNotes } from '../hooks/useSecretRoomVoiceNotes.js';
 import Button from './ui/Button.jsx';
 import './FinalReveal.css';
 
@@ -10,8 +9,7 @@ const CONFETTI_COLORS = ['gold', 'purple', 'white'];
 
 function FinalReveal() {
   const { content } = useSiteContent();
-  const { recipientName, message } = content.finalReveal;
-  const { voiceNotes, loading: voiceLoading } = useSecretRoomVoiceNotes();
+  const { recipientName, message, videoUrl } = content.finalReveal;
 
   const confetti = useMemo(() => {
     return Array.from({ length: CONFETTI_COUNT }).map((_, i) => ({
@@ -76,28 +74,15 @@ function FinalReveal() {
         {message}
       </motion.p>
 
-      {!voiceLoading && voiceNotes.length > 0 && (
+      {videoUrl && (
         <motion.div
-          className="final-reveal-voices"
+          className="final-reveal-video-wrapper"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
-          <p className="final-reveal-voices-title">Voices For You</p>
-
-          <div className="final-reveal-voice-list">
-            {voiceNotes.map((note) => (
-              <div className="final-reveal-voice-note" key={note.id}>
-                <p className="final-reveal-voice-name">{note.speaker_name}</p>
-                {note.relationship && (
-                  <p className="final-reveal-voice-relationship">
-                    {note.relationship}
-                  </p>
-                )}
-                <audio className="final-reveal-audio" controls src={note.audio_url} />
-              </div>
-            ))}
-          </div>
+          <p className="final-reveal-video-label">One last thing</p>
+          <video className="final-reveal-video" src={videoUrl} controls playsInline />
         </motion.div>
       )}
 

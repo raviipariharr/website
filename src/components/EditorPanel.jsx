@@ -8,6 +8,8 @@ import SisterAwardsEditorSection from './SisterAwardsEditorSection.jsx';
 import SecretRoomEditorSection from './SecretRoomEditorSection.jsx';
 import QuizEditorSection from './QuizEditorSection.jsx';
 import BackgroundMusicUploadSection from './BackgroundMusicUploadSection.jsx';
+import Gift2CakeUploadSection from './Gift2CakeUploadSection.jsx';
+import FinalVideoUploadSection from './FinalVideoUploadSection.jsx';
 import { defaultContent } from '../data/defaultContent.js';
 
 const SITE_SLUG = 'default';
@@ -43,8 +45,7 @@ function EditorPanel() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  async function handleSave(e) {
-    e.preventDefault();
+  async function handleSave() {
     setSaving(true);
 
     const { error } = await supabase
@@ -64,13 +65,8 @@ function EditorPanel() {
         gift1_line1: form.gift1_line1,
         gift1_line2: form.gift1_line2,
         gift1_line3: form.gift1_line3,
-        gift2_question: form.gift2_question,
-        gift2_option1_label: form.gift2_option1_label,
-        gift2_option2_label: form.gift2_option2_label,
-        gift2_option3_label: form.gift2_option3_label,
-        gift2_result_argument: form.gift2_result_argument,
-        gift2_result_love: form.gift2_result_love,
-        gift2_result_steal: form.gift2_result_steal,
+        gift2_intro_text: form.gift2_intro_text,
+        gift2_final_text: form.gift2_final_text,
         gift3_message: form.gift3_message,
         quiz_end_message: form.quiz_end_message,
       })
@@ -138,7 +134,7 @@ function EditorPanel() {
   }
 
   return (
-    <form className="editor-form" onSubmit={handleSave}>
+    <div className="editor-form">
       <h2 className="editor-heading">Edit Site Content</h2>
 
       <label className="editor-label">
@@ -283,88 +279,26 @@ function EditorPanel() {
 
       <div className="editor-divider" />
       <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
-        Gift Two — Interactive Question
+        Gift Two — Cake Text
       </p>
 
       <label className="editor-label">
-        Question
+        Intro Text (shown with the whole cake)
         <input
           className="editor-input"
-          value={form.gift2_question || ''}
-          onChange={(e) => handleChange('gift2_question', e.target.value)}
-          placeholder={defaultContent.gift2.question}
+          value={form.gift2_intro_text || ''}
+          onChange={(e) => handleChange('gift2_intro_text', e.target.value)}
+          placeholder={defaultContent.gift2.introText}
         />
       </label>
 
       <label className="editor-label">
-        Option 1
-        <input
-          className="editor-input"
-          value={form.gift2_option1_label || ''}
-          onChange={(e) => handleChange('gift2_option1_label', e.target.value)}
-          placeholder={defaultContent.gift2.option1Label}
-        />
-      </label>
-
-      <label className="editor-label">
-        Option 2
-        <input
-          className="editor-input"
-          value={form.gift2_option2_label || ''}
-          onChange={(e) => handleChange('gift2_option2_label', e.target.value)}
-          placeholder={defaultContent.gift2.option2Label}
-        />
-      </label>
-
-      <label className="editor-label">
-        Option 3
-        <input
-          className="editor-input"
-          value={form.gift2_option3_label || ''}
-          onChange={(e) => handleChange('gift2_option3_label', e.target.value)}
-          placeholder={defaultContent.gift2.option3Label}
-        />
-      </label>
-
-      <p
-        style={{
-          color: 'var(--text-tertiary)',
-          fontSize: 'var(--font-caption)',
-          marginTop: 4,
-        }}
-      >
-        Results for each option — use {'{name}'} to insert the Recipient Name.
-      </p>
-
-      <label className="editor-label">
-        Result for Option 1
+        Final Text (shown after cutting)
         <textarea
           className="editor-input editor-textarea"
-          value={form.gift2_result_argument || ''}
-          onChange={(e) => handleChange('gift2_result_argument', e.target.value)}
-          placeholder={defaultContent.gift2.resultArgument}
-          rows={2}
-        />
-      </label>
-
-      <label className="editor-label">
-        Result for Option 2
-        <textarea
-          className="editor-input editor-textarea"
-          value={form.gift2_result_love || ''}
-          onChange={(e) => handleChange('gift2_result_love', e.target.value)}
-          placeholder={defaultContent.gift2.resultLove}
-          rows={2}
-        />
-      </label>
-
-      <label className="editor-label">
-        Result for Option 3
-        <textarea
-          className="editor-input editor-textarea"
-          value={form.gift2_result_steal || ''}
-          onChange={(e) => handleChange('gift2_result_steal', e.target.value)}
-          placeholder={defaultContent.gift2.resultSteal}
+          value={form.gift2_final_text || ''}
+          onChange={(e) => handleChange('gift2_final_text', e.target.value)}
+          placeholder={defaultContent.gift2.finalText}
           rows={2}
         />
       </label>
@@ -449,6 +383,20 @@ function EditorPanel() {
 
       <div className="editor-divider" />
 
+      <Gift2CakeUploadSection
+        currentBeforeUrl={form.gift2_cake_before_url}
+        currentAfterUrl={form.gift2_cake_after_url}
+        onUpdated={({ beforeUrl, afterUrl }) =>
+          setForm((prev) => ({
+            ...prev,
+            ...(beforeUrl ? { gift2_cake_before_url: beforeUrl } : {}),
+            ...(afterUrl ? { gift2_cake_after_url: afterUrl } : {}),
+          }))
+        }
+      />
+
+      <div className="editor-divider" />
+
       <BackgroundMusicUploadSection
         currentMusicUrl={form.background_music_url}
         onMusicUploaded={(url) =>
@@ -467,10 +415,19 @@ function EditorPanel() {
 
       <div className="editor-divider" />
 
-      <Button type="submit" fullWidth disabled={saving}>
+      <FinalVideoUploadSection
+        currentVideoUrl={form.final_video_note_url}
+        onVideoUploaded={(url) =>
+          setForm((prev) => ({ ...prev, final_video_note_url: url }))
+        }
+      />
+
+      <div className="editor-divider" />
+
+      <Button type="button" fullWidth disabled={saving} onClick={handleSave}>
         {saving ? 'Saving...' : 'Save Changes'}
       </Button>
-    </form>
+    </div>
   );
 }
 

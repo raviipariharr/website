@@ -19,6 +19,7 @@ export const defaultContent = {
   finalReveal: {
     recipientName: 'You',
     message: 'Happy birthday — I love you.',
+    videoUrl: null,
   },
   gift1: {
     line1: 'CONGRATULATIONS',
@@ -26,13 +27,10 @@ export const defaultContent = {
     line3: 'Absolutely nothing. 😂',
   },
   gift2: {
-    question: 'Who is more likely to...',
-    option1Label: 'Start an unnecessary argument?',
-    option2Label: 'Say "I love you" first?',
-    option3Label: "Steal the other's stuff?",
-    resultArgument: "Oh, {name} already know it's {name}. 😂 Every single time, over nothing.",
-    resultLove: "It's {name} — always has been. ❤️ Softest heart in the room, no contest.",
-    resultSteal: "Guilty as charged, {name}. 🤦 We all know whose hoodie that actually is.",
+    introText: "Here's your cake! Now what are you waiting for? Tap to cut!",
+    finalText: "Ohh sorry, this cake can't be eaten. 😂 So go open your third gift instead.",
+    cakeBeforeUrl: null,
+    cakeAfterUrl: null,
   },
   gift3: {
     message: "You really thought I'd tell you what's inside? 😂",

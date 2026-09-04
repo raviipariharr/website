@@ -27,6 +27,7 @@ function mapRowToContent(data) {
     finalReveal: {
       recipientName: data.recipient_name || defaultContent.finalReveal.recipientName,
       message: data.final_message || defaultContent.finalReveal.message,
+      videoUrl: data.final_video_note_url || null,
     },
     gift1: {
       line1: data.gift1_line1 || defaultContent.gift1.line1,
@@ -34,13 +35,10 @@ function mapRowToContent(data) {
       line3: data.gift1_line3 || defaultContent.gift1.line3,
     },
     gift2: {
-      question: data.gift2_question || defaultContent.gift2.question,
-      option1Label: data.gift2_option1_label || defaultContent.gift2.option1Label,
-      option2Label: data.gift2_option2_label || defaultContent.gift2.option2Label,
-      option3Label: data.gift2_option3_label || defaultContent.gift2.option3Label,
-      resultArgument: data.gift2_result_argument || defaultContent.gift2.resultArgument,
-      resultLove: data.gift2_result_love || defaultContent.gift2.resultLove,
-      resultSteal: data.gift2_result_steal || defaultContent.gift2.resultSteal,
+      introText: data.gift2_intro_text || defaultContent.gift2.introText,
+      finalText: data.gift2_final_text || defaultContent.gift2.finalText,
+      cakeBeforeUrl: data.gift2_cake_before_url || null,
+      cakeAfterUrl: data.gift2_cake_after_url || null,
     },
     gift3: {
       message: data.gift3_message || defaultContent.gift3.message,
