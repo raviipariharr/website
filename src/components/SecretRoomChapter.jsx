@@ -1,91 +1,130 @@
 import { useState } from 'react';
-import { supabase } from '../lib/supabaseClient.js';
-import { useToast } from './ui/ToastContext.jsx';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useSiteContent } from '../hooks/useSiteContent.js';
 import Button from './ui/Button.jsx';
+import './SecretRoomChapter.css';
 
-const SITE_SLUG = 'default';
-const SECRET_PHOTO_PATH = 'secret-room/photo';
+function SecretRoomChapter({ onContinue }) {
+  const { content } = useSiteContent();
 
-function SecretRoomEditorSection({ currentPhotoUrl, onPhotoUploaded }) {
-  const { showToast } = useToast();
-  const [photoFile, setPhotoFile] = useState(null);
-  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [doorOpened, setDoorOpened] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [error, setError] = useState(null);
+  const [unlocked, setUnlocked] = useState(false);
 
-  async function handleUploadPhoto() {
-    if (!photoFile) {
-      showToast('Choose a photo first.', 'error');
-      return;
-    }
+  const secretRoom = content.secretRoom || {};
+  const roomReady = !!secretRoom.password;
 
-    setUploadingPhoto(true);
+  function handleUnlock(e) {
+    e.preventDefault();
 
-    const { error: uploadError } = await supabase.storage
-      .from('site-assets')
-      .upload(SECRET_PHOTO_PATH, photoFile, {
-        upsert: true,
-        contentType: photoFile.type,
-      });
+    const correct =
+      passwordInput.trim().toLowerCase() ===
+      (secretRoom.password || '').trim().toLowerCase();
 
-    if (uploadError) {
-      console.error('Upload error:', uploadError);
-      showToast('Photo upload failed — try again.', 'error');
-      setUploadingPhoto(false);
-      return;
-    }
-
-    const { data: publicUrlData } = supabase.storage
-      .from('site-assets')
-      .getPublicUrl(SECRET_PHOTO_PATH);
-
-    const freshUrl = `${publicUrlData.publicUrl}?updated=${Date.now()}`;
-
-    const { error: dbError } = await supabase
-      .from('site_content')
-      .update({ secret_room_photo_url: freshUrl })
-      .eq('slug', SITE_SLUG);
-
-    if (dbError) {
-      showToast('Photo uploaded, but saving it failed.', 'error');
+    if (correct) {
+      setUnlocked(true);
+      setError(null);
     } else {
-      showToast('Secret room photo updated.', 'success');
-      setPhotoFile(null);
-      onPhotoUploaded?.(freshUrl);
+      setError('Not quite — try again.');
     }
-
-    setUploadingPhoto(false);
   }
 
   return (
-    <div className="editor-form">
-      <h2 className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
-        Secret Room Photo
-      </h2>
+    <section className={`secret-room ${unlocked ? 'secret-room-unlocked' : ''}`}>
+      <h2 className="secret-room-title">Secret Room</h2>
 
-      {currentPhotoUrl && (
-        <p className="editor-trailer-status">A secret photo is currently set.</p>
+      {!unlocked && (
+        <div className="secret-room-door-area">
+          {!roomReady && (
+            <p className="secret-room-status">
+              This room hasn't been set up yet — nothing to find here right now.
+            </p>
+          )}
+
+          {roomReady && !doorOpened && (
+            <motion.button
+              type="button"
+              className="secret-room-door"
+              onClick={() => setDoorOpened(true)}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="secret-room-door-icon">🚪</span>
+              <span className="secret-room-door-label">Click here</span>
+            </motion.button>
+          )}
+
+          <AnimatePresence>
+            {roomReady && doorOpened && (
+              <motion.form
+                className="editor-form secret-room-form"
+                onSubmit={handleUnlock}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 12 }}
+                transition={{ duration: 0.4 }}
+              >
+                {secretRoom.hint && (
+                  <p className="secret-room-hint">Hint: {secretRoom.hint}</p>
+                )}
+
+                <label className="editor-label">
+                  Password
+                  <input
+                    className="editor-input"
+                    type="text"
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                    autoFocus
+                  />
+                </label>
+
+                {error && <p className="editor-error">{error}</p>}
+
+                <Button type="submit" fullWidth>
+                  Unlock
+                </Button>
+              </motion.form>
+            )}
+          </AnimatePresence>
+
+          <button type="button" className="secret-room-skip" onClick={onContinue}>
+            Skip →
+          </button>
+        </div>
       )}
 
-      <label className="editor-label">
-        Secret Photo
-        <input
-          className="editor-input"
-          type="file"
-          accept="image/*"
-          onChange={(e) => setPhotoFile(e.target.files[0] || null)}
-        />
-      </label>
+      <AnimatePresence>
+        {unlocked && (
+          <motion.div
+            className="secret-room-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            {secretRoom.note && <p className="secret-room-note">{secretRoom.note}</p>}
 
-      <Button
-        type="button"
-        variant="secondary"
-        fullWidth
-        disabled={uploadingPhoto}
-        onClick={handleUploadPhoto}
-      >
-        {uploadingPhoto ? 'Uploading...' : 'Upload Photo'}
-      </Button>
-    </div>
+            {secretRoom.photoUrl && (
+              <div className="secret-room-photo-frame">
+                <img
+                  src={secretRoom.photoUrl}
+                  alt="A secret memory"
+                  className="secret-room-photo"
+                />
+              </div>
+            )}
+
+            <div className="secret-room-continue">
+              <Button variant="primary" onClick={onContinue}>
+                CONTINUE →
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
   );
 }
 
-export default SecretRoomEditorSection;
+export default SecretRoomChapter;
