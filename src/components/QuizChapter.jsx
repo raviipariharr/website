@@ -10,6 +10,8 @@ function QuizChapter({ onContinue }) {
   const { content } = useSiteContent();
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState(null);
+  const [score, setScore] = useState(0);
+  const [answeredCount, setAnsweredCount] = useState(0);
   const [finished, setFinished] = useState(false);
 
   const current = questions[index];
@@ -18,6 +20,13 @@ function QuizChapter({ onContinue }) {
     if (selected) return;
     setSelected(option);
 
+    if (current.correct_answer) {
+      setAnsweredCount((c) => c + 1);
+      if (option === current.correct_answer) {
+        setScore((s) => s + 1);
+      }
+    }
+
     setTimeout(() => {
       if (index + 1 >= questions.length) {
         setFinished(true);
@@ -25,10 +34,12 @@ function QuizChapter({ onContinue }) {
         setIndex((i) => i + 1);
         setSelected(null);
       }
-    }, 700);
+    }, 900);
   }
 
   const showContinue = !loading && (questions.length === 0 || finished);
+  const isCorrect = selected && current?.correct_answer && selected === current.correct_answer;
+  const isWrong = selected && current?.correct_answer && selected !== current.correct_answer;
 
   return (
     <section className="quiz-chapter">
@@ -57,20 +68,36 @@ function QuizChapter({ onContinue }) {
               <p className="quiz-question">{current.question_text}</p>
 
               <div className="quiz-options">
-                {(current.options || []).map((opt) => (
-                  <button
-                    key={opt}
-                    type="button"
-                    className={`quiz-option ${
-                      selected === opt ? 'quiz-option-selected' : ''
-                    }`}
-                    onClick={() => handleSelect(opt)}
-                    disabled={!!selected}
-                  >
-                    {opt}
-                  </button>
-                ))}
+                {(current.options || []).map((opt) => {
+                  const isSelectedOpt = selected === opt;
+                  const isCorrectOpt = current.correct_answer === opt;
+
+                  let stateClass = '';
+                  if (selected) {
+                    if (isSelectedOpt && isCorrectOpt) stateClass = 'quiz-option-correct';
+                    else if (isSelectedOpt && !isCorrectOpt) stateClass = 'quiz-option-wrong';
+                    else if (isCorrectOpt) stateClass = 'quiz-option-reveal-correct';
+                  }
+
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`quiz-option ${stateClass}`}
+                      onClick={() => handleSelect(opt)}
+                      disabled={!!selected}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
               </div>
+
+              {selected && current.correct_answer && (
+                <p className={`quiz-feedback ${isCorrect ? 'quiz-feedback-correct' : 'quiz-feedback-wrong'}`}>
+                  {isCorrect ? 'Correct! 🎉' : `Not quite — it's "${current.correct_answer}."`}
+                </p>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -83,6 +110,11 @@ function QuizChapter({ onContinue }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
+          {answeredCount > 0 && (
+            <p className="quiz-score">
+              You got {score} out of {answeredCount} right.
+            </p>
+          )}
           <p className="quiz-end-message">{content.quiz?.endMessage}</p>
         </motion.div>
       )}
