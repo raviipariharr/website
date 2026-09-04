@@ -3,12 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Modal from './ui/Modal.jsx';
 import { useSiteContent } from '../hooks/useSiteContent.js';
 
-const OPTIONS = [
-  { id: 'argument', emoji: '😂', label: 'Start an unnecessary argument?' },
-  { id: 'love', emoji: '❤️', label: 'Say "I love you" first?' },
-  { id: 'steal', emoji: '🤦', label: 'Steal the other\'s stuff?' },
-];
-
 function fillName(template, name) {
   const who = name || 'you';
   return (template || '').split('{name}').join(who);
@@ -19,7 +13,21 @@ function Gift2Modal({ onClose }) {
   const [choice, setChoice] = useState(null);
 
   const recipientName = content.finalReveal?.recipientName;
-  const { resultArgument, resultLove, resultSteal } = content.gift2;
+  const {
+    question,
+    option1Label,
+    option2Label,
+    option3Label,
+    resultArgument,
+    resultLove,
+    resultSteal,
+  } = content.gift2;
+
+  const options = [
+    { id: 'argument', emoji: '😂', label: option1Label },
+    { id: 'love', emoji: '❤️', label: option2Label },
+    { id: 'steal', emoji: '🤦', label: option3Label },
+  ];
 
   const resultTemplates = {
     argument: resultArgument,
@@ -49,11 +57,11 @@ function Gift2Modal({ onClose }) {
                 marginBottom: 'var(--space-md)',
               }}
             >
-              Who is more likely to...
+              {question}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {OPTIONS.map((opt) => (
+              {options.map((opt) => (
                 <button
                   key={opt.id}
                   type="button"

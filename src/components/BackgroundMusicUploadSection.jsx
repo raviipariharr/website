@@ -21,7 +21,10 @@ function BackgroundMusicUploadSection({ currentMusicUrl, onMusicUploaded }) {
 
     const { error: uploadError } = await supabase.storage
       .from('site-assets')
-      .upload(MUSIC_STORAGE_PATH, file, { upsert: true, contentType: file.type });
+      .upload(MUSIC_STORAGE_PATH, file, {
+        upsert: true,
+        contentType: file.type || 'audio/mpeg',
+      });
 
     if (uploadError) {
       console.error('Upload error:', uploadError);

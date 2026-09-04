@@ -10,6 +10,15 @@ export function BackgroundMusicProvider({ children }) {
 
   const musicUrl = content.backgroundMusic?.url;
 
+  // Force the element to pick up a new/changed source explicitly —
+  // relying on the src attribute alone can leave a stale element
+  // that never actually loads the updated file.
+  useEffect(() => {
+    if (audioRef.current && musicUrl) {
+      audioRef.current.load();
+    }
+  }, [musicUrl]);
+
   const tryPlay = useCallback(() => {
     if (!wantsPlayingRef.current) return;
     if (!audioRef.current || !musicUrl) return;
@@ -19,8 +28,6 @@ export function BackgroundMusicProvider({ children }) {
     });
   }, [musicUrl]);
 
-  // If the music URL loads after the user already tapped to start
-  // (e.g. content was still fetching), catch up once it's ready.
   useEffect(() => {
     tryPlay();
   }, [tryPlay]);
@@ -44,11 +51,27 @@ export function BackgroundMusicProvider({ children }) {
     return audioRef.current.muted;
   }, []);
 
+  function handleAudioError() {
+    const el = audioRef.current;
+    console.error(
+      'Background music failed to load/play. Element error:',
+      el?.error,
+      'Source:',
+      musicUrl
+    );
+  }
+
   return (
     <BackgroundMusicContext.Provider
       value={{ start, pause, resume, toggleMute, hasMusic: !!musicUrl }}
     >
-      <audio ref={audioRef} src={musicUrl || undefined} loop preload="auto" />
+      <audio
+        ref={audioRef}
+        src={musicUrl || undefined}
+        loop
+        preload="auto"
+        onError={handleAudioError}
+      />
       {children}
     </BackgroundMusicContext.Provider>
   );

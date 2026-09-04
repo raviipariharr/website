@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSiteContent } from '../hooks/useSiteContent.js';
-import { useSecretRoomVoiceNotes } from '../hooks/useSecretRoomVoiceNotes.js';
 import Button from './ui/Button.jsx';
 import './SecretRoomChapter.css';
 
 function SecretRoomChapter({ onContinue }) {
   const { content } = useSiteContent();
-  const { voiceNotes, loading: voiceLoading } = useSecretRoomVoiceNotes();
 
   const [doorOpened, setDoorOpened] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
@@ -114,22 +112,6 @@ function SecretRoomChapter({ onContinue }) {
                   alt="A secret memory"
                   className="secret-room-photo"
                 />
-              </div>
-            )}
-
-            {!voiceLoading && voiceNotes.length > 0 && (
-              <div className="secret-room-voice-list">
-                {voiceNotes.map((note) => (
-                  <div className="secret-room-voice-note" key={note.id}>
-                    <p className="secret-room-voice-name">{note.speaker_name}</p>
-                    {note.relationship && (
-                      <p className="secret-room-voice-relationship">
-                        {note.relationship}
-                      </p>
-                    )}
-                    <audio className="secret-room-audio" controls src={note.audio_url} />
-                  </div>
-                ))}
               </div>
             )}
 

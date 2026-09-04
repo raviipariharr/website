@@ -26,6 +26,10 @@ export const defaultContent = {
     line3: 'Absolutely nothing. 😂',
   },
   gift2: {
+    question: 'Who is more likely to...',
+    option1Label: 'Start an unnecessary argument?',
+    option2Label: 'Say "I love you" first?',
+    option3Label: "Steal the other's stuff?",
     resultArgument: "Oh, {name} already know it's {name}. 😂 Every single time, over nothing.",
     resultLove: "It's {name} — always has been. ❤️ Softest heart in the room, no contest.",
     resultSteal: "Guilty as charged, {name}. 🤦 We all know whose hoodie that actually is.",

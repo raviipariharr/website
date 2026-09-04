@@ -64,6 +64,10 @@ function EditorPanel() {
         gift1_line1: form.gift1_line1,
         gift1_line2: form.gift1_line2,
         gift1_line3: form.gift1_line3,
+        gift2_question: form.gift2_question,
+        gift2_option1_label: form.gift2_option1_label,
+        gift2_option2_label: form.gift2_option2_label,
+        gift2_option3_label: form.gift2_option3_label,
         gift2_result_argument: form.gift2_result_argument,
         gift2_result_love: form.gift2_result_love,
         gift2_result_steal: form.gift2_result_steal,
@@ -134,228 +138,272 @@ function EditorPanel() {
   }
 
   return (
-    <>
-      <form className="editor-form" onSubmit={handleSave}>
-        <h2 className="editor-heading">Edit Site Content</h2>
+    <form className="editor-form" onSubmit={handleSave}>
+      <h2 className="editor-heading">Edit Site Content</h2>
 
-        <label className="editor-label">
-          Recipient Name
-          <input
-            className="editor-input"
-            value={form.recipient_name || ''}
-            onChange={(e) => handleChange('recipient_name', e.target.value)}
-          />
-        </label>
+      <label className="editor-label">
+        Recipient Name
+        <input
+          className="editor-input"
+          value={form.recipient_name || ''}
+          onChange={(e) => handleChange('recipient_name', e.target.value)}
+        />
+      </label>
 
-        <label className="editor-label">
-          Relationship
-          <input
-            className="editor-input"
-            value={form.relationship || ''}
-            onChange={(e) => handleChange('relationship', e.target.value)}
-          />
-        </label>
+      <label className="editor-label">
+        Relationship
+        <input
+          className="editor-input"
+          value={form.relationship || ''}
+          onChange={(e) => handleChange('relationship', e.target.value)}
+        />
+      </label>
 
-        <label className="editor-label">
-          Birthday Date
-          <input
-            className="editor-input"
-            type="date"
-            value={form.birthday_date || ''}
-            onChange={(e) => handleChange('birthday_date', e.target.value)}
-          />
-        </label>
+      <label className="editor-label">
+        Birthday Date
+        <input
+          className="editor-input"
+          type="date"
+          value={form.birthday_date || ''}
+          onChange={(e) => handleChange('birthday_date', e.target.value)}
+        />
+      </label>
 
-        <label className="editor-label">
-          Title
-          <input
-            className="editor-input"
-            value={form.title || ''}
-            onChange={(e) => handleChange('title', e.target.value)}
-          />
-        </label>
+      <label className="editor-label">
+        Title
+        <input
+          className="editor-input"
+          value={form.title || ''}
+          onChange={(e) => handleChange('title', e.target.value)}
+        />
+      </label>
 
-        <label className="editor-label">
-          Subtitle
-          <input
-            className="editor-input"
-            value={form.subtitle || ''}
-            onChange={(e) => handleChange('subtitle', e.target.value)}
-          />
-        </label>
+      <label className="editor-label">
+        Subtitle
+        <input
+          className="editor-input"
+          value={form.subtitle || ''}
+          onChange={(e) => handleChange('subtitle', e.target.value)}
+        />
+      </label>
 
-        <label className="editor-label">
-          Genre
-          <input
-            className="editor-input"
-            value={form.genre || ''}
-            onChange={(e) => handleChange('genre', e.target.value)}
-          />
-        </label>
+      <label className="editor-label">
+        Genre
+        <input
+          className="editor-input"
+          value={form.genre || ''}
+          onChange={(e) => handleChange('genre', e.target.value)}
+        />
+      </label>
 
-        <label className="editor-label">
-          Final Message
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.final_message || ''}
-            onChange={(e) => handleChange('final_message', e.target.value)}
-            rows={3}
-          />
-        </label>
+      <label className="editor-label">
+        Final Message
+        <textarea
+          className="editor-input editor-textarea"
+          value={form.final_message || ''}
+          onChange={(e) => handleChange('final_message', e.target.value)}
+          rows={3}
+        />
+      </label>
 
-        <label className="editor-label">
-          Hidden Hearts Reward Message
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.hearts_reward_message || ''}
-            onChange={(e) =>
-              handleChange('hearts_reward_message', e.target.value)
-            }
-            rows={2}
-          />
-        </label>
+      <label className="editor-label">
+        Hidden Hearts Reward Message
+        <textarea
+          className="editor-input editor-textarea"
+          value={form.hearts_reward_message || ''}
+          onChange={(e) =>
+            handleChange('hearts_reward_message', e.target.value)
+          }
+          rows={2}
+        />
+      </label>
 
-        <label className="editor-label">
-          Secret Room Password
-          <input
-            className="editor-input"
-            value={form.secret_room_password || ''}
-            onChange={(e) => handleChange('secret_room_password', e.target.value)}
-          />
-        </label>
+      <label className="editor-label">
+        Secret Room Password
+        <input
+          className="editor-input"
+          value={form.secret_room_password || ''}
+          onChange={(e) => handleChange('secret_room_password', e.target.value)}
+        />
+      </label>
 
-        <label className="editor-label">
-          Secret Room Hint
-          <input
-            className="editor-input"
-            value={form.secret_room_hint || ''}
-            onChange={(e) => handleChange('secret_room_hint', e.target.value)}
-          />
-        </label>
+      <label className="editor-label">
+        Secret Room Hint
+        <input
+          className="editor-input"
+          value={form.secret_room_hint || ''}
+          onChange={(e) => handleChange('secret_room_hint', e.target.value)}
+        />
+      </label>
 
-        <label className="editor-label">
-          Secret Room Note
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.secret_room_note || ''}
-            onChange={(e) => handleChange('secret_room_note', e.target.value)}
-            rows={3}
-          />
-        </label>
+      <label className="editor-label">
+        Secret Room Note
+        <textarea
+          className="editor-input editor-textarea"
+          value={form.secret_room_note || ''}
+          onChange={(e) => handleChange('secret_room_note', e.target.value)}
+          rows={3}
+        />
+      </label>
 
-        <div className="editor-divider" />
-        <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
-          Gift One — Funny Surprise
-        </p>
+      <div className="editor-divider" />
+      <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
+        Gift One — Funny Surprise
+      </p>
 
-        <label className="editor-label">
-          Line 1
-          <input
-            className="editor-input"
-            value={form.gift1_line1 || ''}
-            onChange={(e) => handleChange('gift1_line1', e.target.value)}
-            placeholder={defaultContent.gift1.line1}
-          />
-        </label>
+      <label className="editor-label">
+        Line 1
+        <input
+          className="editor-input"
+          value={form.gift1_line1 || ''}
+          onChange={(e) => handleChange('gift1_line1', e.target.value)}
+          placeholder={defaultContent.gift1.line1}
+        />
+      </label>
 
-        <label className="editor-label">
-          Line 2
-          <input
-            className="editor-input"
-            value={form.gift1_line2 || ''}
-            onChange={(e) => handleChange('gift1_line2', e.target.value)}
-            placeholder={defaultContent.gift1.line2}
-          />
-        </label>
+      <label className="editor-label">
+        Line 2
+        <input
+          className="editor-input"
+          value={form.gift1_line2 || ''}
+          onChange={(e) => handleChange('gift1_line2', e.target.value)}
+          placeholder={defaultContent.gift1.line2}
+        />
+      </label>
 
-        <label className="editor-label">
-          Line 3 (the punchline)
-          <input
-            className="editor-input"
-            value={form.gift1_line3 || ''}
-            onChange={(e) => handleChange('gift1_line3', e.target.value)}
-            placeholder={defaultContent.gift1.line3}
-          />
-        </label>
+      <label className="editor-label">
+        Line 3 (the punchline)
+        <input
+          className="editor-input"
+          value={form.gift1_line3 || ''}
+          onChange={(e) => handleChange('gift1_line3', e.target.value)}
+          placeholder={defaultContent.gift1.line3}
+        />
+      </label>
 
-        <div className="editor-divider" />
-        <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
-          Gift Two — Interactive Question Results
-        </p>
+      <div className="editor-divider" />
+      <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
+        Gift Two — Interactive Question
+      </p>
 
-        <label className="editor-label">
-          Result: "Start an unnecessary argument?"
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.gift2_result_argument || ''}
-            onChange={(e) => handleChange('gift2_result_argument', e.target.value)}
-            placeholder={defaultContent.gift2.resultArgument}
-            rows={2}
-          />
-        </label>
+      <label className="editor-label">
+        Question
+        <input
+          className="editor-input"
+          value={form.gift2_question || ''}
+          onChange={(e) => handleChange('gift2_question', e.target.value)}
+          placeholder={defaultContent.gift2.question}
+        />
+      </label>
 
-        <label className="editor-label">
-          Result: "Say 'I love you' first?"
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.gift2_result_love || ''}
-            onChange={(e) => handleChange('gift2_result_love', e.target.value)}
-            placeholder={defaultContent.gift2.resultLove}
-            rows={2}
-          />
-        </label>
+      <label className="editor-label">
+        Option 1
+        <input
+          className="editor-input"
+          value={form.gift2_option1_label || ''}
+          onChange={(e) => handleChange('gift2_option1_label', e.target.value)}
+          placeholder={defaultContent.gift2.option1Label}
+        />
+      </label>
 
-        <label className="editor-label">
-          Result: "Steal the other's stuff?"
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.gift2_result_steal || ''}
-            onChange={(e) => handleChange('gift2_result_steal', e.target.value)}
-            placeholder={defaultContent.gift2.resultSteal}
-            rows={2}
-          />
-        </label>
+      <label className="editor-label">
+        Option 2
+        <input
+          className="editor-input"
+          value={form.gift2_option2_label || ''}
+          onChange={(e) => handleChange('gift2_option2_label', e.target.value)}
+          placeholder={defaultContent.gift2.option2Label}
+        />
+      </label>
 
-        <div className="editor-divider" />
-        <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
-          Gift Three — Mystery Message
-        </p>
+      <label className="editor-label">
+        Option 3
+        <input
+          className="editor-input"
+          value={form.gift2_option3_label || ''}
+          onChange={(e) => handleChange('gift2_option3_label', e.target.value)}
+          placeholder={defaultContent.gift2.option3Label}
+        />
+      </label>
 
-        <label className="editor-label">
-          Message
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.gift3_message || ''}
-            onChange={(e) => handleChange('gift3_message', e.target.value)}
-            placeholder={defaultContent.gift3.message}
-            rows={2}
-          />
-        </label>
+      <p
+        style={{
+          color: 'var(--text-tertiary)',
+          fontSize: 'var(--font-caption)',
+          marginTop: 4,
+        }}
+      >
+        Results for each option — use {'{name}'} to insert the Recipient Name.
+      </p>
 
-        <div className="editor-divider" />
-        <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
-          Quiz End Message
-        </p>
+      <label className="editor-label">
+        Result for Option 1
+        <textarea
+          className="editor-input editor-textarea"
+          value={form.gift2_result_argument || ''}
+          onChange={(e) => handleChange('gift2_result_argument', e.target.value)}
+          placeholder={defaultContent.gift2.resultArgument}
+          rows={2}
+        />
+      </label>
 
-        <label className="editor-label">
-          Message
-          <textarea
-            className="editor-input editor-textarea"
-            value={form.quiz_end_message || ''}
-            onChange={(e) => handleChange('quiz_end_message', e.target.value)}
-            placeholder={defaultContent.quiz.endMessage}
-            rows={2}
-          />
-        </label>
+      <label className="editor-label">
+        Result for Option 2
+        <textarea
+          className="editor-input editor-textarea"
+          value={form.gift2_result_love || ''}
+          onChange={(e) => handleChange('gift2_result_love', e.target.value)}
+          placeholder={defaultContent.gift2.resultLove}
+          rows={2}
+        />
+      </label>
 
-        <Button type="submit" fullWidth disabled={saving}>
-          {saving ? 'Saving...' : 'Save Changes'}
-        </Button>
-      </form>
+      <label className="editor-label">
+        Result for Option 3
+        <textarea
+          className="editor-input editor-textarea"
+          value={form.gift2_result_steal || ''}
+          onChange={(e) => handleChange('gift2_result_steal', e.target.value)}
+          placeholder={defaultContent.gift2.resultSteal}
+          rows={2}
+        />
+      </label>
+
+      <div className="editor-divider" />
+      <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
+        Gift Three — Mystery Message
+      </p>
+
+      <label className="editor-label">
+        Message
+        <textarea
+          className="editor-input editor-textarea"
+          value={form.gift3_message || ''}
+          onChange={(e) => handleChange('gift3_message', e.target.value)}
+          placeholder={defaultContent.gift3.message}
+          rows={2}
+        />
+      </label>
+
+      <div className="editor-divider" />
+      <p className="editor-heading" style={{ fontSize: 'var(--font-body)' }}>
+        Quiz End Message
+      </p>
+
+      <label className="editor-label">
+        Message
+        <textarea
+          className="editor-input editor-textarea"
+          value={form.quiz_end_message || ''}
+          onChange={(e) => handleChange('quiz_end_message', e.target.value)}
+          placeholder={defaultContent.quiz.endMessage}
+          rows={2}
+        />
+      </label>
 
       <div className="editor-divider" />
 
-      <div className="editor-form">
+      <div>
         <h2 className="editor-heading">Trailer Video</h2>
 
         {form.trailer_video_url && (
@@ -416,7 +464,13 @@ function EditorPanel() {
           setForm((prev) => ({ ...prev, secret_room_photo_url: url }))
         }
       />
-    </>
+
+      <div className="editor-divider" />
+
+      <Button type="submit" fullWidth disabled={saving}>
+        {saving ? 'Saving...' : 'Save Changes'}
+      </Button>
+    </form>
   );
 }
 

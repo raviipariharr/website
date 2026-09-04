@@ -34,6 +34,10 @@ function mapRowToContent(data) {
       line3: data.gift1_line3 || defaultContent.gift1.line3,
     },
     gift2: {
+      question: data.gift2_question || defaultContent.gift2.question,
+      option1Label: data.gift2_option1_label || defaultContent.gift2.option1Label,
+      option2Label: data.gift2_option2_label || defaultContent.gift2.option2Label,
+      option3Label: data.gift2_option3_label || defaultContent.gift2.option3Label,
       resultArgument: data.gift2_result_argument || defaultContent.gift2.resultArgument,
       resultLove: data.gift2_result_love || defaultContent.gift2.resultLove,
       resultSteal: data.gift2_result_steal || defaultContent.gift2.resultSteal,

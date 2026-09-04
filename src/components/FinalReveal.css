@@ -66,6 +66,51 @@
   margin-bottom: var(--space-xl);
 }
 
+.final-reveal-voices {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: var(--space-xl);
+}
+
+.final-reveal-voices-title {
+  font-size: var(--font-caption);
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.final-reveal-voice-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.final-reveal-voice-note {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  text-align: left;
+}
+
+.final-reveal-voice-name {
+  font-size: var(--font-body);
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.final-reveal-voice-relationship {
+  font-size: var(--font-caption);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.final-reveal-audio {
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .final-reveal-message {
     max-width: 560px;
